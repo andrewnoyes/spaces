@@ -1,6 +1,6 @@
 # Setup
-* Create a Firebase account, [firebase.google.com](firebase.google.com).
-* Create a file named `firebaseConfig.js` in `./src/services` with your config details: 
+1. Create a Firebase account, [firebase.google.com](firebase.google.com)
+2. Create a file named `firebaseConfig.js` in `./src/services` with your config details: 
 
 ```js
 export const firebaseConfig = {
@@ -12,3 +12,6 @@ export const firebaseConfig = {
     messagingSenderId: {YOUR_SENDER_ID}
   };
 ```
+
+3. Install project dependencies: `yarn` or `npm install`
+4. Start the project: `yarn start` or `npm start`
