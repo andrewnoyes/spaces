@@ -1,0 +1,8 @@
+.form-builder {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-builder > div {
+  margin-bottom: 10px;
+}

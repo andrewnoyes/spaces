@@ -1,0 +1,8 @@
+.content-container {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background-color: #eee;
+  text-align: center;
+  overflow: auto;
+}

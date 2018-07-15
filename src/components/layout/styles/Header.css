@@ -1,0 +1,15 @@
+.header-container {
+  top: 0;
+  right: 0;
+  position: absolute;
+  background-color: #3f51b5;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  margin-left: 10px;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "spaces",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@uifabric/icons": "^6.0.2",
+    "emoji-mart": "^2.6.1",
+    "firebase": "^5.1.0",
+    "mobx": "^5.0.3",
+    "mobx-react": "^5.2.3",
+    "office-ui-fabric-react": "^6.21.1",
+    "pubsub-js": "^1.6.0",
+    "react": "^16.4.1",
+    "react-app-rewire-mobx": "^1.0.8",
+    "react-dom": "^16.4.1",
+    "react-firebaseui": "^3.0.4",
+    "react-grid-layout": "^0.16.6",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired",
+    "test": "react-app-rewired --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-app-rewired": "^1.5.2"
+  }
+}

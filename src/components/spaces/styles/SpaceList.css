@@ -1,0 +1,36 @@
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-item-side,
+.list-item {
+  text-decoration: none;
+}
+
+.list-item {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.list-item-side {
+  width: 100%;
+  padding: 6px 20px;
+  color: black;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.list-item-side:hover {
+  background-color: #eee;
+}
+
+.list-item-side-selected, 
+.list-item-side-selected:hover{
+  background-color: #bbb;
+}
