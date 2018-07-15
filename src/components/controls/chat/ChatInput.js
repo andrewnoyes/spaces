@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import 'emoji-mart/css/emoji-mart.css';
 // import { Picker } from 'emoji-mart';
-// import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { IconButton } from 'office-ui-fabric-react/lib/Button';
 // import { Overlay } from 'office-ui-fabric-react/lib/Overlay';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { IconButton } from 'office-ui-fabric-react/lib/Button';
 
 class ChatInput extends Component {
   constructor(props) {
@@ -23,27 +23,20 @@ class ChatInput extends Component {
   render() {
     return (
       <div className="chat-input-container">
-        {/* <TextField
-          multiline
-          borderless
-          placeholder="Message @"
-          className="chat-input-textfield"
-          inputClassName="chat-input-textarea"
-          onMouseDown={e => e.stopPropagation()}
-        /> */}
+
         <div className="chat-input-controls">
           <IconButton
             iconProps={{ iconName: 'Add' }}
           />
         </div>
-        <div
-          contentEditable={true}
-          placeholder="hi"
+        <TextField
+          // multiline
+          borderless
+          placeholder="Message @"
           className="chat-input-textfield"
-          onInput={this.onChange}
-          dangerouslySetInnerHTML={{ __html: this.state.message }}
+          inputClassName="chat-input-textarea"
+          onMouseDown={e => e.stopPropagation()}
         />
-
         <div className="chat-input-controls">
           <IconButton
             iconProps={{ iconName: 'Accounts' }}

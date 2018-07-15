@@ -1,3 +1,11 @@
+.chat-feed-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  position: absolute;
+  overflow-y: auto;
+}
 .chat-comment-createdAt {
   margin-left: 10px;
 }

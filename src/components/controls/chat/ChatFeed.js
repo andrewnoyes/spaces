@@ -29,7 +29,7 @@ class ChatFeed extends Component {
     })
 
     return (
-      <div>
+      <div className="chat-feed-container">
         {
           activityItems.map((item, index) => {
             return (
