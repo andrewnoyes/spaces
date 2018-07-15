@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
-import { FormBuilder, formFactory } from './';
+import { FormBuilder, FormFactory } from './';
 
 class FormDialog extends Component {
   constructor(props) {
     super(props);
 
-    const { formOptions, formFields } = formFactory(props.formType);
+    const { formOptions, formFields } = FormFactory(props.formType);
     this.state = formFields;
     this.formOptions = formOptions;
   }

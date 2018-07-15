@@ -1,4 +1,4 @@
-const formFactory = (formType) => {
+export const FormFactory = (formType) => {
   switch (formType) {
     case 'spaces':
       return {
@@ -15,5 +15,3 @@ const formFactory = (formType) => {
       return null;
   }
 }
-
-export default formFactory;
