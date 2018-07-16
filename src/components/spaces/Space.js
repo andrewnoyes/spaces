@@ -58,7 +58,7 @@ class Space extends Component {
 
     if (!activeSpace) {
       return (
-        <h1>No space found ¯\_(ツ)_/¯</h1>
+        <h1 style={{ textAlign: 'center' }}>No space found ¯\_(ツ)_/¯</h1>
       )
     }
 

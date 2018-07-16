@@ -12,12 +12,14 @@ class Account extends Component {
     const { isSignedIn, uiConfig, firebaseAuth, signOut } = authStore;
     if (isSignedIn) {
       return (
-        <DefaultButton
-          primary={true}
-          text="Sign Out"
-          onClick={() => signOut()}
-          className="sign-out"
-        />
+        <div style={{ textAlign: 'center' }}>
+          <DefaultButton
+            primary={true}
+            text="Sign Out"
+            onClick={() => signOut()}
+            className="sign-out"
+          />
+        </div>
       )
     }
 

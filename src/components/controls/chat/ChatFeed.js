@@ -2,18 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { ActivityItem } from 'office-ui-fabric-react/lib/ActivityItem';
 
-const testComments = [
-  { id: 1, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 2, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 3, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 4, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 5, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 6, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-]
 
 class ChatFeed extends Component {
   render() {
-    const comments = this.props.comments || testComments;
+    const { comments } = this.props;
     const activityItems = [];
     comments.forEach(comment => {
       activityItems.push({

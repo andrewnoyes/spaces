@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <h3>Placeholder :p</h3>
         <Link to='/account'>Account</Link>
       </div>

@@ -20,14 +20,17 @@ class ChatInput extends Component {
     console.log(e)
   }
 
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmitComment(this.state.message);
+    this.setState({ message: '' });
+  }
+
   render() {
     return (
-      <div className="chat-input-container">
-
+      <form className="chat-input-container" onSubmit={this.onSubmit}>
         <div className="chat-input-controls">
-          <IconButton
-            iconProps={{ iconName: 'Add' }}
-          />
+          <IconButton iconProps={{ iconName: 'Add' }} />
         </div>
         <TextField
           // multiline
@@ -36,6 +39,8 @@ class ChatInput extends Component {
           className="chat-input-textfield"
           inputClassName="chat-input-textarea"
           onMouseDown={e => e.stopPropagation()}
+          value={this.state.message}
+          onChanged={val => this.setState({ message: val })}
         />
         <div className="chat-input-controls">
           <IconButton
@@ -54,7 +59,7 @@ class ChatInput extends Component {
             <Picker />
           </Overlay>
         } */}
-      </div >
+      </form>
     )
   }
 }

@@ -6,7 +6,8 @@ class AuthStore {
   @observable uiConfig;
   @observable user;
 
-  @computed get isSignedIn() {
+  @computed 
+  get isSignedIn() {
     return !!this.user;
   }
 

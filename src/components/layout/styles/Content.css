@@ -3,6 +3,6 @@
   right: 0;
   position: absolute;
   background-color: #eee;
-  text-align: center;
+  /* text-align: center; */
   overflow: auto;
 }
