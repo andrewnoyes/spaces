@@ -13,7 +13,6 @@ class ChatFeed extends Component {
   }
 
   scrollToBottom = () => {
-    // const list = document.getElementById('scrollList');
     if (this._chatFeed) {
       this._chatFeed.scrollTop = this._chatFeed.scrollHeight;
     }
