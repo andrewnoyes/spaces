@@ -80,10 +80,7 @@ class ChatStore {
   onChatCreated = async (_msg, data) => {
     try {
       const { id } = data;
-      await this.roomsCollection.doc(id).set({
-        name: '',
-        comments: []
-      })
+      await this.roomsCollection.doc(id).set({ name: '' })
     } catch (err) {
       console.log('onChatCreated', err);
     }
