@@ -15,12 +15,17 @@ class ChatStore {
     // pubsub.subscribe('chat_deleted', this.onChatDeleted);
   }
 
-  hasRoom = id => !!this.rooms[id];
+  @action
+  hasRoom = id => !!this.getRoom(id);
 
   @action
-  loadRoom = async (id) => {
+  getRoom = id => this.rooms[id];
+
+  @action
+  loadRoom = id => {
     console.log('load chat room', id);
     if (this.rooms[id]) {
+      console.log('local has chat room', id);
       return;
     }
 
@@ -30,20 +35,54 @@ class ChatStore {
   }
 
   @action
+  loadComments = id => {
+    return new Promise(
+      (resolve, reject) => {
+        const commentsCollection = this.roomsCollection.doc(id).collection('comments');
+        commentsCollection.orderBy('createdAt').get()
+          .then(docs => {
+            const comments = (this.rooms[id].comments || []).slice();
+            docs.forEach(doc => {
+              const data = doc.exists ? doc.data() : {}
+              const comment = Object.assign({}, doc.id, data)
+              comments.push(comment);
+            })
+
+            this.rooms[id].comments = comments;
+            resolve();
+          })
+          .catch(err => reject(err));
+      }
+    )
+  }
+
+  @action
   addComment = async (roomId, username, userId, value) => {
-    if (!this.hasRoom(roomId) || !!this.loadingRooms[roomId]) {
+    if (!this.hasRoom(roomId) || this.loadingRooms[roomId]) {
       return;
     }
 
+    const comment = { username, userId, value, createdAt: new Date().toISOString() };
+    this.roomsCollection.doc(roomId).collection('comments')
+      .add(comment)
+      .then(doc => {
+        comment.id = doc.id;
+        const comments = (this.rooms[roomId].comments || []).slice();
+        comments.push(comment);
 
+        this.rooms[roomId].comments = comments;
+      })
+      .catch(err => {
+        console.log('err', err);
+      })
   }
 
-  onChatCreated = async (_msg, { id, spaceId }) => {
+  onChatCreated = async (_msg, data) => {
     try {
+      const { id } = data;
       await this.roomsCollection.doc(id).set({
-        spaceId,
         name: '',
-        messages: []
+        comments: []
       })
     } catch (err) {
       console.log('onChatCreated', err);
@@ -62,14 +101,24 @@ class ChatStore {
   onSnapshot = doc => {
     const id = doc.id;
     if (doc.exists) {
-      this.rooms[id] = doc.data();
+      const data = doc.data();
+      this.rooms[id] = data;
+    } else if (this.hasRoom(id)) {
+      this.rooms[id] = null;
+      delete this.rooms[id];
     } else {
-      this.onChatCreated(Object.assign({}, {id: doc.id}, doc.data()))
-      console.log('!doc.exists not implemented -> onSnapshot chat-store');
+      this.onChatCreated(null, { id });
+      return;
     }
 
     if (this.loadingRooms[id]) {
-      this.loadingRooms[id] = false;
+      this.loadComments(id)
+        .then(() => {
+          this.loadingRooms[id] = false;
+        })
+        .catch(err => {
+          console.log('loadComments', err);
+        });
     }
   }
 }

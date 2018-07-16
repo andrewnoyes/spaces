@@ -24,37 +24,50 @@ export default class ChatRoom extends Component {
     // props.chatStore.loadRoom(props.id);
   }
 
-  onCommentAdded = comment => {
-    const { authStore } = this.props;
+  componentDidMount() {
+    this.props.chatStore.loadRoom(this.props.id);
+  }
+
+  onCommentAdded = value => {
+    const { authStore, chatStore, id } = this.props;
     if (!authStore.isSignedIn) {
       return;
     }
-
+    // const comment = {
+    //   username: user.displayName,
+    //   createdAt: new Date().toLocaleTimeString(),
+    //   value: comment
+    // }
     const user = authStore.user;
-    const comments = this.state.comments.slice();
-    comments.push({
-      id: comments.length + 1,
-      username: user.displayName,
-      createdAt: new Date().toLocaleTimeString(),
-      value: comment
-    });
+    chatStore.addComment(id, user.displayName, user.uid, value);
 
-    this.setState({ comments: comments });
+    // const comments = this.state.comments.slice();
+    // comments.push({
+    //   id: comments.length + 1,
+    //   username: user.displayName,
+    //   createdAt: new Date().toLocaleTimeString(),
+    //   value: comment
+    // });
+
+    // this.setState({ comments: comments });
   }
 
   render() {
-    // const { chatStore, id } = this.props;
-    // if (chatStore.loadingRooms[id]) {
-    //   return (
-    //     <div>
-    //       loading... :)
-    //     </div>
-    //   )
-    // }
+    const { chatStore, id } = this.props;
+    if (chatStore.loadingRooms[id] || !chatStore.hasRoom(id)) {
+      return (
+        <div>
+          loading... :)
+        </div>
+      )
+    }
+
+    const room = chatStore.rooms[id];
+    const { comments } = room;
 
     return (
       <div>
-        <ChatFeed comments={this.state.comments} />
+        <ChatFeed comments={comments} />
         <ChatInput onSubmitComment={this.onCommentAdded} />
       </div>
     )
