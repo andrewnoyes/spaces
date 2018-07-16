@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { ChatInput, ChatFeed } from './';
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
-const testComments = [
-  { id: 1, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 2, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 3, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 4, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 5, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-  { id: 6, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
-];
+import { ChatInput, ChatFeed } from './';
 
 @inject('authStore', 'chatStore')
 @observer
@@ -17,15 +10,7 @@ export default class ChatRoom extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      comments: testComments
-    }
-
-    // props.chatStore.loadRoom(props.id);
-  }
-
-  componentDidMount() {
-    this.props.chatStore.loadRoom(this.props.id);
+    props.chatStore.loadRoom(props.id);
   }
 
   onCommentAdded = value => {
@@ -33,33 +18,17 @@ export default class ChatRoom extends Component {
     if (!authStore.isSignedIn) {
       return;
     }
-    // const comment = {
-    //   username: user.displayName,
-    //   createdAt: new Date().toLocaleTimeString(),
-    //   value: comment
-    // }
+
     const user = authStore.user;
     chatStore.addComment(id, user.displayName, user.uid, value);
-
-    // const comments = this.state.comments.slice();
-    // comments.push({
-    //   id: comments.length + 1,
-    //   username: user.displayName,
-    //   createdAt: new Date().toLocaleTimeString(),
-    //   value: comment
-    // });
-
-    // this.setState({ comments: comments });
   }
 
   render() {
     const { chatStore, id } = this.props;
-    if (chatStore.loadingRooms[id] || !chatStore.hasRoom(id)) {
-      return (
-        <div>
-          loading... :)
-        </div>
-      )
+    const loading = chatStore.loadingRooms[id] || !chatStore.hasRoom(id)
+
+    if (loading) {
+      return <Spinner size={SpinnerSize.small} style={{ marginTop: 10 }} />;
     }
 
     const room = chatStore.rooms[id];

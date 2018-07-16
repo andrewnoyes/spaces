@@ -55,7 +55,7 @@ export default class PhotoViewer extends Component {
     const { photos } = photosStore;
 
     const photo = photos[id];
-    const photoSource = photo.photoSource;
+    const photoSource = photo ? photo.photoSource : '';
 
     if (!photoSource) {
       return (
