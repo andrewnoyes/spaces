@@ -61,7 +61,8 @@ class ChatStore {
     if (!this.hasRoom(roomId) || this.loadingRooms[roomId]) {
       return;
     }
-
+// TODO: this does not handle real-time updates between multiple clients!!!
+// probably need to listen for snapshot
     const comment = { username, userId, value, createdAt: new Date().toISOString() };
     this.roomsCollection.doc(roomId).collection('comments')
       .add(comment)
