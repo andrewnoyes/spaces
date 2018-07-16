@@ -11,7 +11,7 @@ const testComments = [
   { id: 6, username: 'androo', createdAt: new Date().toLocaleTimeString(), value: 'herro comment pls' },
 ];
 
-@inject('authStore')
+@inject('authStore', 'chatStore')
 @observer
 export default class ChatRoom extends Component {
   constructor(props) {
@@ -20,6 +20,8 @@ export default class ChatRoom extends Component {
     this.state = {
       comments: testComments
     }
+
+    // props.chatStore.loadRoom(props.id);
   }
 
   onCommentAdded = comment => {
@@ -41,6 +43,15 @@ export default class ChatRoom extends Component {
   }
 
   render() {
+    // const { chatStore, id } = this.props;
+    // if (chatStore.loadingRooms[id]) {
+    //   return (
+    //     <div>
+    //       loading... :)
+    //     </div>
+    //   )
+    // }
+
     return (
       <div>
         <ChatFeed comments={this.state.comments} />
